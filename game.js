@@ -6,9 +6,7 @@ var cols;
 var score = 0;
 var highScore;
 
-function reset_matrix(){
-
-	for(i=0;i<rows;i++){
+function reset_matrix(){for(i=0;i<rows;i++){
 		game_matrix.push([]);
 		prev_state.push([]);
 	}
@@ -20,13 +18,13 @@ function reset_matrix(){
 	}
 }
 function getRandomPosition(){
-	var empty_pos = [];
-	var game_over = true;
-	for(i=0;i<16;i++){
-			if(game_matrix[parseInt(i/4)][parseInt(i%4)] == 0){
-				empty_pos.push(i);
-				game_over = false;
-			}
+var empty_pos = [];
+var game_over = true;
+for(i=0;i<16;i++){
+if(game_matrix[parseInt(i/4)][parseInt(i%4)] == 0){
+empty_pos.push(i);
+game_over = false;
+	}
 			
 	}
 	if(game_over==true){
@@ -43,17 +41,16 @@ function getRandomNumber(){
 	var r = Math.random();
 	//console.log(r);
 	if(r > 0.2){
-		return 2;
+	return 2;
 	}
 	else{ 
-		return 4;
+	return 4;
 	}
 }
 function render(){
 	for(i=0;i<16;i++){
-		
 		if(game_matrix[parseInt(i/4)][i%4]!=0)
-			document.getElementById(""+i).innerHTML = game_matrix[parseInt(i/4)][i%4]; 
+		document.getElementById(""+i).innerHTML = game_matrix[parseInt(i/4)][i%4]; 
 		else
 			document.getElementById(""+i).innerHTML =".";
 	}	
@@ -69,50 +66,41 @@ function render(){
 	document.getElementById("high_score").innerHTML ="HighScore :" + highScore;
 }
 
-function clubHorizontally(){
-	for(row=0;row<4;row++){
-		for(i=0;i<4;i++){
+function clubHorizontally(){for(row=0;row<4;row++){
+	for(i=0;i<4;i++){
 			//Check for the first Non Zero ith column in row.	
-			if(game_matrix[row][i]!=0){
+if(game_matrix[row][i]!=0)
+{
 				//Find the the first Non-zero entry corresponding to i.
-				for(j=i+1;j<4;j++){
-					if(game_matrix[row][j]!=0){	
-						if(game_matrix[row][i]==game_matrix[row][j]){
+for(j=i+1;j<4;j++){
+	if(game_matrix[row][j]!=0){	
+			if(game_matrix[row][i]==game_matrix[row][j]){
 							//If Equal then Merge and Jump i .
-							game_matrix[row][i] = game_matrix[row][i]*2;
-							score += game_matrix[row][i];
-							game_matrix[row][j] = 0 ;
-							i=j;
+				game_matrix[row][i] = game_matrix[row][i]*2;
+				score += game_matrix[row][i];
+				game_matrix[row][j] = 0 ;
+				i=j;
 							}
 					//Break after finding the first non zero element correponding to ith.		
 					break;
-					}
-				}
-
-			}
-		}
-	}	
+					}}
+}}}	
 
 }
-function clubVertically(){
-	for(col=0;col<4;col++){
+function clubVertically(){for(col=0;col<4;col++){
 		for(i=0;i<4;i++){
-			if(game_matrix[i][col]!=0){
-				for(j=i+1;j<4;j++){
-					if(game_matrix[j][col]!=0){
-						if(game_matrix[i][col]==game_matrix[j][col]){
-							game_matrix[i][col] *=2;
-							score += game_matrix[i][col];
-							game_matrix[j][col] = 0;
-							i= j ;
+		if(game_matrix[i][col]!=0){
+		for(j=i+1;j<4;j++){
+		if(game_matrix[j][col]!=0){
+		if(game_matrix[i][col]==game_matrix[j][col]){
+		game_matrix[i][col] *=2;
+		score += game_matrix[i][col];
+		game_matrix[j][col] = 0;
+		i= j ;
 							//Jump	
-						}
-					break;	
-					}
-				}
-			}
 		}
-	}
+	    break;	
+		}}}}}
 
 }
 function moveLeft(){
@@ -136,12 +124,12 @@ console.log("left");
 function moveUp(){
 clubVertically();
 //Shift Zeroes To Bottom
-	for(col=0;col<4;col++){
-		count=0;
-		for(i=0;i<4;i++){
-			if(game_matrix[i][col]!=0)
+for(col=0;col<4;col++){
+count=0;
+for(i=0;i<4;i++){
+		if(game_matrix[i][col]!=0)
 			{
-				game_matrix[count++][col]=game_matrix[i][col];
+			game_matrix[count++][col]=game_matrix[i][col];
 				
 			}
 		}
